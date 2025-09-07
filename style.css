@@ -1,29 +1,36 @@
-/* Placeholder untuk styling utama */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: #333;
 }
 
 .calendar-container {
-    width: 80%;
-    max-width: 600px;
+    width: 90%;
+    max-width: 900px; /* Lebar maksimum yang lebih besar */
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     position: relative;
     color: white;
     text-align: right;
-    padding: 20px;
-    background: linear-gradient(135deg, #1f2a4a, #4a6fa5); /* Warna gradien seperti di gambar */
+    padding: 30px;
+    height: 200px; /* Tinggi header yang lebih proporsional */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    box-sizing: border-box;
 }
 
 .header-image-container {
@@ -32,70 +39,203 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('images (3).jpeg'); /* Ganti dengan gambar yang sesuai */
+    background-image: url('https://via.placeholder.com/1200x400/1e3a8a/ffffff?text=Kalender+2026+Header+Image'); /* Ganti dengan URL gambar ilustrasi yang menarik */
     background-size: cover;
     background-position: center;
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%); /* Bentuk melengkung yang unik */
+    border-bottom-left-radius: 50% 20%; /* Kurva di bagian bawah kiri */
+    border-bottom-right-radius: 50% 20%; /* Kurva di bagian bawah kanan */
+    clip-path: ellipse(150% 100% at 50% 100%); /* Efek elips yang lebih halus */
 }
 
 .title, .year {
     position: relative;
     z-index: 1;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 700;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.title {
+    font-size: 2.2em;
+    letter-spacing: 1px;
+}
+
+.year {
+    font-size: 3.5em;
+    line-height: 0.9;
+    margin-top: 5px;
 }
 
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    padding: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Tiga kolom bulan */
+    gap: 25px;
+    padding: 30px;
+    flex-grow: 1;
 }
 
-/* Styling untuk setiap bulan, hari, dan tanggal */
 .month-card {
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 10px;
+    background-color: #fefefe;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
-    transition: transform 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
 }
 
 .month-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .month-name {
     font-weight: bold;
-    margin-bottom: 5px;
+    font-size: 1.3em;
+    color: #1e3a8a;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 8px;
 }
 
 .day-names {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    font-size: 12px;
-    color: #888;
+    font-size: 0.85em;
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.day-names span {
+    padding: 5px 0;
 }
 
 .dates-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    font-size: 14px;
+    font-size: 1em;
+    flex-grow: 1;
 }
 
 .date-cell {
-    padding: 5px;
+    padding: 8px 0;
     text-align: center;
     cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px; /* Memastikan tinggi minimum */
 }
 
 .date-cell:hover {
-    background-color: #eee;
-    border-radius: 50%;
+    background-color: #e0f7fa;
+    color: #007bff;
+}
+
+.date-cell.empty {
+    visibility: hidden; /* Sembunyikan sel kosong */
 }
 
 .today {
     background-color: #007bff;
     color: white;
-    border-radius: 50%;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Navigasi Bulan */
+.navigation-tabs {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.month-tabs {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.month-tab {
+    background-color: #e9ecef;
+    color: #495057;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    flex-grow: 1; /* Agar tombol mengisi ruang */
+    text-transform: uppercase;
+}
+
+.month-tab:hover {
+    background-color: #ced4da;
+    color: #212529;
+}
+
+.month-tab.active {
+    background-color: #1e3a8a;
+    color: white;
+    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr); /* Dua kolom di tablet */
+    }
+    .header {
+        height: 150px;
+        padding: 20px;
+    }
+    .title {
+        font-size: 1.8em;
+    }
+    .year {
+        font-size: 3em;
+    }
+    .month-tabs {
+        flex-wrap: wrap; /* Tombol bulan akan wrap di layar kecil */
+    }
+    .month-tab {
+        flex-basis: calc(33.333% - 10px); /* Tiga tombol per baris */
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-grid {
+        grid-template-columns: 1fr; /* Satu kolom di ponsel */
+        padding: 15px;
+    }
+    .calendar-container {
+        width: 100%;
+        margin: 10px;
+    }
+    .header {
+        height: 120px;
+        padding: 15px;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .year {
+        font-size: 2.5em;
+    }
+    .month-tabs {
+        gap: 5px;
+    }
+    .month-tab {
+        flex-basis: calc(25% - 5px); /* Empat tombol per baris */
+        font-size: 0.8em;
+        padding: 8px 10px;
+    }
 }
