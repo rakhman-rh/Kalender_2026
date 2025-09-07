@@ -1,3 +1,4 @@
+/* Base Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f7fa;
@@ -7,11 +8,13 @@ body {
     align-items: center;
     min-height: 100vh;
     color: #333;
+    padding: 20px; /* Tambahkan padding agar tidak menempel di sisi layar */
+    box-sizing: border-box;
 }
 
 .calendar-container {
-    width: 90%;
-    max-width: 900px; /* Lebar maksimum yang lebih besar */
+    width: 100%;
+    max-width: 900px;
     background-color: #fff;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
@@ -20,12 +23,13 @@ body {
     flex-direction: column;
 }
 
+/* Header */
 .header {
     position: relative;
     color: white;
     text-align: right;
     padding: 30px;
-    height: 200px; /* Tinggi header yang lebih proporsional */
+    height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -39,12 +43,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://via.placeholder.com/1200x400/1e3a8a/ffffff?text=Kalender+2026+Header+Image'); /* Ganti dengan URL gambar ilustrasi yang menarik */
+    background-image: url('https://via.placeholder.com/1200x400/1e3a8a/ffffff?text=Kalender+2026+Header');
     background-size: cover;
     background-position: center;
-    border-bottom-left-radius: 50% 20%; /* Kurva di bagian bawah kiri */
-    border-bottom-right-radius: 50% 20%; /* Kurva di bagian bawah kanan */
-    clip-path: ellipse(150% 100% at 50% 100%); /* Efek elips yang lebih halus */
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
+    clip-path: ellipse(150% 100% at 50% 100%);
 }
 
 .title, .year {
@@ -66,9 +70,10 @@ body {
     margin-top: 5px;
 }
 
+/* Calendar Grid */
 .calendar-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Tiga kolom bulan */
+    grid-template-columns: repeat(3, 1fr);
     gap: 25px;
     padding: 30px;
     flex-grow: 1;
@@ -85,11 +90,6 @@ body {
     flex-direction: column;
 }
 
-.month-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
 .month-name {
     font-weight: bold;
     font-size: 1.3em;
@@ -100,6 +100,103 @@ body {
 }
 
 .day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.85em;
+    color: #666;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.dates-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 1em;
+    flex-grow: 1;
+}
+
+.date-cell {
+    padding: 8px 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+    min-height: 30px;
+}
+
+.today {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Navigation Tabs */
+.navigation-tabs {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.month-tabs {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: nowrap; /* Pastikan tombol tidak terpotong */
+    overflow-x: auto; /* Tambahkan scroll horizontal jika terlalu banyak */
+    padding-bottom: 5px; /* Memberi ruang untuk scrollbar */
+}
+
+.month-tab {
+    background-color: #e9ecef;
+    color: #495057;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    flex-shrink: 0; /* Hindari tombol menyusut */
+}
+
+.month-tab.active {
+    background-color: #1e3a8a;
+    color: white;
+    box-shadow: 0 4px 10px rgba(30, 58, 138, 0.3);
+}
+
+/* Media Queries untuk Responsivitas */
+@media (max-width: 992px) {
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr); /* Dua kolom di tablet */
+    }
+}
+
+@media (max-width: 600px) {
+    .calendar-grid {
+        grid-template-columns: 1fr; /* Satu kolom di ponsel */
+        padding: 15px;
+        gap: 20px;
+    }
+    .header {
+        height: 150px;
+        padding: 20px;
+    }
+    .title {
+        font-size: 1.8em;
+    }
+    .year {
+        font-size: 3em;
+    }
+    .navigation-tabs {
+        padding: 10px 15px;
+    }
+    .month-tabs {
+        justify-content: flex-start; /* Tombol rata kiri di ponsel */
+    }
+}.day-names {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     font-size: 0.85em;
